@@ -1,4 +1,4 @@
-ansible_linux_python3
+linux_python3
 =========
 
 Проверяет наличие интерпретатора Python3 и устанавливает его при необходимости.
@@ -20,7 +20,7 @@ gather_facts: false в купе с ролью позволяет купиров�
   gather_facts: false
 
   roles:
-    - { role: ansible_linux_python3 }
+    - { role: linux_python3 }
 ```
 
 Role Variables
@@ -40,7 +40,7 @@ Example Playbook
   vars:
     linux_python3_setup_fact: false
   roles:
-    - { role: ansible_linux_python3 }
+    - { role: linux_python3 }
 ```
 
 License

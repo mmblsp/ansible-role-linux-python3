@@ -1,7 +1,6 @@
 ---
 galaxy_info:
   author: Anatoliy Zhuchkov
-  namespace: mmblspace
   description: test and install python3 for linux
 
   license: Apache-2.0
@@ -19,6 +18,6 @@ galaxy_info:
       versions:
         - buster
 
-  galaxy_tags: []
+  galaxy_tags: [python3]
 
 dependencies: []
