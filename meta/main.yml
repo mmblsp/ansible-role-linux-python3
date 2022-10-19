@@ -1,0 +1,24 @@
+---
+galaxy_info:
+  author: Anatoliy Zhuchkov
+  namespace: mmblspace
+  description: test and install python3 for linux
+
+  license: Apache-2.0
+
+  min_ansible_version: 2.8.0
+
+  platforms:
+    - name: EL
+      versions:
+        - "7"
+    - name: Ubuntu
+      versions:
+        - focal
+    - name: Debian
+      versions:
+        - buster
+
+  galaxy_tags: []
+
+dependencies: []

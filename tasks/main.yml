@@ -1,0 +1,57 @@
+---
+# tasks file for ansible_linux_python
+- name: Get os-release
+  raw: cat /etc/os-release
+  register: os_release
+  changed_when: false
+
+- name: Test python3
+  shell: "python3 --version 2>&1"
+  register: interpreter_python
+  failed_when: interpreter_python.rc not in (0, 127)
+  changed_when: false
+
+- name: Install python CentOS-7
+  raw: "yum update -y && yum install -y python3 python3-pip python3-setuptools python3-wheel"
+  when:
+    - interpreter_python.rc != 0
+    - os_release.stdout is regex('CentOS Linux 7')
+
+# https://blog.centos.org/2020/12/future-is-centos-stream/
+# - name: Install python CentOS-8
+#   raw: "dnf update -y && dnf install -y python3 python3-pip python3-setuptools python3-wheel"
+#   when:
+#     - interpreter_python.rc != 0
+#     - os_release.stdout is regex('CentOS Linux 8')
+
+- name: Collect only facts returned by facter
+  setup:
+    gather_subset:
+      - "!all"
+      - "!any"
+      - facter
+  when: linux_python3_setup_fact
+
+- name: Remove useless packages from the cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 86400 #One day
+  when: ansible_facts['os_family'] == 'Debian'
+
+- name: install packages for debian family
+  apt:
+    name:
+      - python3-pip
+      - python3-wheel
+      - python3-setuptools
+    state: present
+  when: ansible_facts['os_family'] == 'Debian'
+
+- name: install packages for RH >= 8 family
+  dnf:
+    name:
+      - python3-pip
+      - python3-wheel
+      - python3-setuptools
+    state: present
+  when: ansible_facts['os_family'] == 'RedHat' and ansible_facts['distribution_major_version']|int >=8

@@ -1,0 +1,4 @@
+---
+# defaults file for ansible_linux_python3
+
+linux_python3_setup_fact: true

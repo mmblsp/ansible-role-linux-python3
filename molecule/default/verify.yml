@@ -1,0 +1,20 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    # Test python 3
+    - name: test python3
+      shell: "python3 --version 2>&1"
+      register: interpreter_python
+      failed_when: interpreter_python.rc not in (0, 127)
+      changed_when: false
+
+    - name: Assertion python
+      assert:
+        that: interpreter_python.rc == 0 and interpreter_python.stdout | length > 0
+        msg: "please install python 3 on {{ inventory_hostname }} from inventory-file"
+      changed_when: false
+  # -- END test python3
