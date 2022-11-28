@@ -1,4 +1,4 @@
-node {
+node() {
     stage('Get Latest Code') {
         checkout scm
     }
@@ -24,6 +24,7 @@ node {
                 script {
                     sh '''#!/bin/bash
                     source ~/workspace/.venv/bin/activate
+                    pwd
                     molecule test'''
                 }
         }
