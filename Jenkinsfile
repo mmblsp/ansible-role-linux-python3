@@ -10,7 +10,6 @@ node {
                     # Create/Activate virtualenv
                     python3 -m venv .venv39
                     source ~/workspace/.venv/bin/activate
-                    cd ssh_user
                     pip install -r requirements.txt'''
                 }
         }
@@ -18,7 +17,6 @@ node {
             script {
                     sh '''#!/bin/bash
                     source ~/workspace/.venv/bin/activate
-                    cd ssh_user
                     molecule lint'''
                 }
         }
@@ -26,7 +24,6 @@ node {
                 script {
                     sh '''#!/bin/bash
                     source ~/workspace/.venv/bin/activate
-                    cd ssh_user
                     molecule test'''
                 }
         }
