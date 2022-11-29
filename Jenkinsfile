@@ -17,6 +17,7 @@ node() {
             script {
                     sh '''#!/bin/bash
                     source ~/workspace/.venv/bin/activate
+                    sh 'ln -sf `pwd` molecule/default/roles/linux_python3'
                     molecule lint'''
                 }
         }
@@ -24,7 +25,6 @@ node() {
                 script {
                     sh '''#!/bin/bash
                     source ~/workspace/.venv/bin/activate
-                    pwd
                     molecule test'''
                 }
         }
