@@ -13,11 +13,14 @@ node() {
                     pip install -r requirements.txt'''
                 }
         }
+        stage('workspace') {
+            sh 'mkdir -p molecule/default/roles'
+            sh 'ln -sf `pwd` molecule/default/roles/linux_python3'
+        }
         stage('molecule lint') {
             script {
                     sh '''#!/bin/bash
                     source ~/workspace/.venv/bin/activate
-                    sh 'ln -sf `pwd` molecule/default/roles/linux_python3'
                     molecule lint'''
                 }
         }
